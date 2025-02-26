@@ -16,7 +16,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
-							"    console.log(\"HI\");",
+							"    console.log(\"Hello\");",
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
