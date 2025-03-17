@@ -1,0 +1,874 @@
+{
+	"info": {
+		"_postman_id": "8b3a3063-3825-43ad-afb6-e9f9e7452b97",
+		"name": "NexisData+_PROD_Regression_Test_Suite",
+		"description": "This endpoint is used to search content across the LexisNexis unified content archive.\n\nContact Support:  \nName: Contact LexisNexis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33101162",
+		"_collection_link": "https://dark-zodiac-120242.postman.co/workspace/Team-Workspace~6aea7fa5-14fe-442e-8158-bd63de8665b8/collection/33101162-8b3a3063-3825-43ad-afb6-e9f9e7452b97?action=share&source=collection_link&creator=33101162"
+	},
+	"item": [
+		{
+			"name": "Refresh_oAuth_Tokens",
+			"item": [
+				{
+					"name": "PROD - urn:user:PA194629722 ALL_Special_Entitlements",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseBody = pm.response.json();",
+									"pm.collectionVariables.set(\"oAuth_token\", responseBody.access_token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{PROD_full_entitlement_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{PROD_full_entitlement_client_secret}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "http://oauth.lexisnexis.com/all",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://auth-api.lexisnexis.com/oauth/v2/token",
+							"protocol": "https",
+							"host": [
+								"auth-api",
+								"lexisnexis",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"v2",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search_Endpoint",
+			"item": [
+				{
+					"name": "News - all parameters used",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"News - all parameters used\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/search?content=news&query=trump&filters=company::Wall Street Journal&sort=date_asc&limit=1&offset=10&group_duplicates=high_similarity&include_filters=true&include_full_document=true&external_client_id=all parameters used",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "content",
+									"value": "news"
+								},
+								{
+									"key": "query",
+									"value": "trump"
+								},
+								{
+									"key": "filters",
+									"value": "company::Wall Street Journal"
+								},
+								{
+									"key": "sort",
+									"value": "date_asc"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "offset",
+									"value": "10"
+								},
+								{
+									"key": "group_duplicates",
+									"value": "high_similarity"
+								},
+								{
+									"key": "include_filters",
+									"value": "true"
+								},
+								{
+									"key": "include_full_document",
+									"value": "true"
+								},
+								{
+									"key": "external_client_id",
+									"value": "all parameters used"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "company-financial - all parameters used",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"CoFi - all parameters used\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/search?content=company-financial&query=trump&filters=source::Worldbox USA&sort=date_asc&limit=1&offset=10&group_duplicates=high_similarity&include_filters=true&include_full_document=true&external_client_id=all parameters used",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "content",
+									"value": "company-financial"
+								},
+								{
+									"key": "query",
+									"value": "trump"
+								},
+								{
+									"key": "filters",
+									"value": "source::Worldbox USA"
+								},
+								{
+									"key": "sort",
+									"value": "date_asc"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "offset",
+									"value": "10"
+								},
+								{
+									"key": "group_duplicates",
+									"value": "high_similarity"
+								},
+								{
+									"key": "include_filters",
+									"value": "true"
+								},
+								{
+									"key": "include_full_document",
+									"value": "true"
+								},
+								{
+									"key": "external_client_id",
+									"value": "all parameters used"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US-Cases - all parameters used",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"US-Cases - all parameters used\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/search?content=us-cases&query=trump&filters=source::9th Circuit - US District Court Cases&sort=date_asc&limit=1&offset=10&group_duplicates=high_similarity&include_filters=true&include_full_document=true&external_client_id=all parameters used",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "content",
+									"value": "us-cases"
+								},
+								{
+									"key": "query",
+									"value": "trump"
+								},
+								{
+									"key": "filters",
+									"value": "source::9th Circuit - US District Court Cases"
+								},
+								{
+									"key": "sort",
+									"value": "date_asc"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "offset",
+									"value": "10"
+								},
+								{
+									"key": "group_duplicates",
+									"value": "high_similarity"
+								},
+								{
+									"key": "include_filters",
+									"value": "true"
+								},
+								{
+									"key": "include_full_document",
+									"value": "true"
+								},
+								{
+									"key": "external_client_id",
+									"value": "all parameters used"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Analytical-Materials - all parameters used",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Analytical-Materials - all parameters used\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/search?content=analytical-materials&query=trump&filters=jurisdiction::International&sort=date_asc&limit=1&offset=10&group_duplicates=high_similarity&include_filters=true&include_full_document=true",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "content",
+									"value": "analytical-materials"
+								},
+								{
+									"key": "query",
+									"value": "trump"
+								},
+								{
+									"key": "filters",
+									"value": "jurisdiction::International"
+								},
+								{
+									"key": "sort",
+									"value": "date_asc"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "offset",
+									"value": "10"
+								},
+								{
+									"key": "group_duplicates",
+									"value": "high_similarity"
+								},
+								{
+									"key": "include_filters",
+									"value": "true"
+								},
+								{
+									"key": "include_full_document",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Directories - all parameters used",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Directories - all parameters used\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/search?content=directories&query=trump&filters=content_type::US Government Official Directories&sort=date_asc&limit=1&offset=10&group_duplicates=high_similarity&include_filters=true&include_full_document=true&external_client_id=all parameters used",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "content",
+									"value": "directories"
+								},
+								{
+									"key": "query",
+									"value": "trump"
+								},
+								{
+									"key": "filters",
+									"value": "content_type::US Government Official Directories"
+								},
+								{
+									"key": "sort",
+									"value": "date_asc"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "offset",
+									"value": "10"
+								},
+								{
+									"key": "group_duplicates",
+									"value": "high_similarity"
+								},
+								{
+									"key": "include_filters",
+									"value": "true"
+								},
+								{
+									"key": "include_full_document",
+									"value": "true"
+								},
+								{
+									"key": "external_client_id",
+									"value": "all parameters used"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Intellectual-Property - all parameters used",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Intellectual-Property - all parameters used\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/search?content=intellectual-property&query=trump&filters=content_type::Copyright Authority Items&sort=date_asc&limit=1&offset=10&group_duplicates=high_similarity&include_filters=true&include_full_document=true&external_client_id=all parameters used",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "content",
+									"value": "intellectual-property"
+								},
+								{
+									"key": "query",
+									"value": "trump"
+								},
+								{
+									"key": "filters",
+									"value": "content_type::Copyright Authority Items"
+								},
+								{
+									"key": "sort",
+									"value": "date_asc"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "offset",
+									"value": "10"
+								},
+								{
+									"key": "group_duplicates",
+									"value": "high_similarity"
+								},
+								{
+									"key": "include_filters",
+									"value": "true"
+								},
+								{
+									"key": "include_full_document",
+									"value": "true"
+								},
+								{
+									"key": "external_client_id",
+									"value": "all parameters used"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Expert-Witness-Analysis - all parameters used",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Expert-Witness-Analysis - all parameters used\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/search?content=expert-witness-analysis&query=trump&filters=jurisdiction::U.S. Federal&sort=date_asc&limit=1&offset=10&group_duplicates=high_similarity&include_filters=true&include_full_document=true&external_client_id=all parameters used",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "content",
+									"value": "expert-witness-analysis"
+								},
+								{
+									"key": "query",
+									"value": "trump"
+								},
+								{
+									"key": "filters",
+									"value": "jurisdiction::U.S. Federal"
+								},
+								{
+									"key": "sort",
+									"value": "date_asc"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "offset",
+									"value": "10"
+								},
+								{
+									"key": "group_duplicates",
+									"value": "high_similarity"
+								},
+								{
+									"key": "include_filters",
+									"value": "true"
+								},
+								{
+									"key": "include_full_document",
+									"value": "true"
+								},
+								{
+									"key": "external_client_id",
+									"value": "all parameters used"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Administrative-Materials - all parameters used",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Administrative-Materials - all parameters used\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/search?content=administrative-materials&query=trump&filters=source::American Maritime Cases - Archived&sort=date_asc&limit=1&offset=10&group_duplicates=high_similarity&include_filters=true&include_full_document=true&external_client_id=all parameters used",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "content",
+									"value": "administrative-materials"
+								},
+								{
+									"key": "query",
+									"value": "trump"
+								},
+								{
+									"key": "filters",
+									"value": "source::American Maritime Cases - Archived"
+								},
+								{
+									"key": "sort",
+									"value": "date_asc"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "offset",
+									"value": "10"
+								},
+								{
+									"key": "group_duplicates",
+									"value": "high_similarity"
+								},
+								{
+									"key": "include_filters",
+									"value": "true"
+								},
+								{
+									"key": "include_full_document",
+									"value": "true"
+								},
+								{
+									"key": "external_client_id",
+									"value": "all parameters used"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Jury-Verdicts-Settlements - all parameters used",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Jury-Verdicts-Settlements - all parameters used\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/search?content=jury-verdicts-settlements&query=trump&filters=source::Jury Verdict Review %26 Analysis&sort=date_asc&limit=1&offset=10&group_duplicates=high_similarity&include_filters=true&include_full_document=true&external_client_id=all parameters used",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "content",
+									"value": "jury-verdicts-settlements"
+								},
+								{
+									"key": "query",
+									"value": "trump"
+								},
+								{
+									"key": "filters",
+									"value": "source::Jury Verdict Review %26 Analysis"
+								},
+								{
+									"key": "sort",
+									"value": "date_asc"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "offset",
+									"value": "10"
+								},
+								{
+									"key": "group_duplicates",
+									"value": "high_similarity"
+								},
+								{
+									"key": "include_filters",
+									"value": "true"
+								},
+								{
+									"key": "include_full_document",
+									"value": "true"
+								},
+								{
+									"key": "external_client_id",
+									"value": "all parameters used"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Dev_Portal_dragonite-spec.yml",
+			"item": [
+				{
+					"name": "dragonite-spec.yml",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"dragonite-spec.yml\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostURL}}/openapi.json",
+							"host": [
+								"{{hostURL}}"
+							],
+							"path": [
+								"openapi.json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{oAuth_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "hostURL",
+			"value": "https://api.dataplus.nexis.com",
+			"type": "string"
+		},
+		{
+			"key": "PROD_full_entitlement_client_id",
+			"value": "DZWGDDQMXX8RTFQZRDWVTFXXVDFMGP",
+			"type": "string"
+		},
+		{
+			"key": "PROD_full_entitlement_client_secret",
+			"value": "HBWTHTNJHTMMKMNKKCMNRBHPJ0PPFWZJCZKJKWJM",
+			"type": "string"
+		},
+		{
+			"key": "oAuth_token",
+			"value": ""
+		}
+	]
+}
